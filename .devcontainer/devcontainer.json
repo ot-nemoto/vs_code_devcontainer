@@ -1,0 +1,11 @@
+{
+  "name": "sandbox",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "workspace",
+  "workspaceFolder": "/workspace/sandbox",
+  "shutdownAction": "stopCompose",
+  "settings": {},
+  "extensions": [],
+  "remoteUser": "ec2-user"
+  // "postCreateCommand": "source $(sudo find / -name git-completion.bash)"
+}
