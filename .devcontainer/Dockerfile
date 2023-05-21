@@ -23,9 +23,19 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 #     && ln -s /usr/local/python/bin/pip3 /usr/local/bin/pip
 
 # create user
-RUN useradd "ec2-user" && echo "ec2-user ALL=NOPASSWD: ALL" >> /etc/sudoers
-RUN echo "alias python=python3.8" | sudo -u ec2-user tee -a /home/ec2-user/.bashrc \
-    && echo "alias pip=pip3.8" | sudo -u ec2-user tee -a /home/ec2-user/.bashrc
+RUN useradd -u 1000 ec2-user && echo "ec2-user ALL=NOPASSWD: ALL" >> /etc/sudoers
+
+USER ec2-user
+
+# Python
+RUN echo "alias python=python3.8" | tee -a ~/.bashrc
+RUN echo "alias pip=pip3.8" | tee -a ~/.bashrc
+# Node
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
+    && source ~/.nvm/nvm.sh \
+    && nvm install 16
+
+USER root
 
 # init
 CMD ["/sbin/init"]
