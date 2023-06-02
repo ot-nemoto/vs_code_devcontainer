@@ -5,7 +5,7 @@ RUN amazon-linux-extras install -y epel
 
 # yum update & install
 RUN yum -y update \
-    && yum -y install shadow-utils systemd tar unzip sudo git mariadb which
+    && yum -y install shadow-utils systemd tar unzip sudo git mariadb which nkf jq
 
 # install aws cli v2
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
